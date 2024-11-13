@@ -1,0 +1,51 @@
+{
+    "123": [
+        {
+            "amount": 200.0,
+            "category": "drugs",
+            "date": "2008-10-15"
+        },
+        {
+            "amount": 24.0,
+            "category": "24dg",
+            "date": "2040-04-04"
+        },
+        {
+            "amount": 32.0,
+            "category": "2",
+            "date": "3222-03-23"
+        },
+        {
+            "amount": 3.0,
+            "category": "2",
+            "date": "22222-02-22"
+        },
+        {
+            "amount": 3.0,
+            "category": "32",
+            "date": "275760-02-23"
+        },
+        {
+            "amount": 3.0,
+            "category": "33",
+            "date": "3333-03-31"
+        },
+        {
+            "amount": 1000000.0,
+            "category": "nice",
+            "date": "20020-02-20"
+        }
+    ],
+    "1234": [
+        {
+            "amount": 100.0,
+            "category": "upi",
+            "date": "2024-10-15"
+        },
+        {
+            "amount": 1000000000000.0,
+            "category": "drugs",
+            "date": "2008-10-15"
+        }
+    ]
+}

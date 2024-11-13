@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Finance - Set Goal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+        }
+        .gradient-text { background: conic-gradient(from 180deg, #e85907, #f83fa4, #00c477, #daac00); -webkit-background-clip: text; color: transparent; }
+        .button-gradient { background: linear-gradient(195deg, #ff00c3, #400986, #0a0749); color: white; }
+    </style>
+</head>
+<body>
+    <h1 class="gradient-text">Set a New Financial Goal</h1>
+    <form action="/set_goal" method="POST" style="max-width: 400px; margin: auto;">
+        <div class="form-group">
+            <label for="goal_name">Goal Name</label>
+            <input type="text" class="form-control" id="goal_name" name="goal_name" required>
+        </div>
+        <div class="form-group">
+            <label for="target_amount">Target Amount</label>
+            <input type="number" class="form-control" id="target_amount" name="target_amount" required>
+        </div>
+        <button type="submit" class="btn button-gradient btn-block">Set Goal</button>
+    </form>
+</body>
+</html>

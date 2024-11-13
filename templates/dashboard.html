@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Finance - Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+        }
+        .gradient-text { background: conic-gradient(from 180deg, #e85907, #f83fa4, #00c477, #daac00); -webkit-background-clip: text; color: transparent; }
+        .button-gradient { background: linear-gradient(195deg, #ff00c3, #400986, #0a0749); color: white; }
+        .card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="gradient-text">Welcome to Your Dashboard</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Your Monthly Income</h3>
+                <form action="{{ url_for('dashboard') }}" method="POST">
+                    <div class="form-group">
+                        <label for="monthly_income">Monthly Income</label>
+                        <input type="number" class="form-control" id="monthly_income" name="monthly_income" value="{{ monthly_income }}" required>
+                    </div>
+                    <button type="submit" class="btn button-gradient">Update Income</button>
+                </form>
+                <p>Your current monthly income is: ${{ monthly_income or 0 }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <h3>Your Savings Goal Percentage</h3>
+                <form action="{{ url_for('dashboard') }}" method="POST">
+                    <div class="form-group">
+                        <label for="savings_percentage">Savings Goal (%)</label>
+                        <input type="number" class="form-control" id="savings_percentage" name="savings_percentage" value="{{ savings_percentage }}" required>
+                    </div>
+                    <button type="submit" class="btn button-gradient">Update Savings Goal</button>
+                </form>
+                <p>Your current savings goal is: {{ savings_percentage }}% of your income.</p>
+                
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3>Savings Over Time</h3>
+                <canvas id="savingsChart"></canvas>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h3>Your Financial Records</h3>
+                <ul>
+                    {% for record in records %}
+                        <li>{{ record['date'] }} - {{ record['description'] }}: ${{ record['amount'] }}</li>
+                    {% endfor %}
+                </ul>
+                <a href="/add_record" class="btn button-gradient mt-3">Add Record</a>
+            </div>
+
+            <div class="col-md-6">
+                <h3>Your Financial Goals</h3>
+                <ul>
+                    {% for goal in goals %}
+                        <li>{{ goal['name'] }} - Goal: ${{ goal['target_amount'] }} | Saved: ${{ goal['saved_amount'] }}</li>
+                    {% endfor %}
+                </ul>
+                <a href="/set_goal" class="btn button-gradient mt-3">Set Goal</a>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3>Spending vs. Projected Spending</h3>
+                <canvas id="spendingChart"></canvas>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3>Goal Progress</h3>
+                <canvas id="goalProgressChart"></canvas>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <a href="{{ url_for('logout') }}" class="btn button-gradient">Logout</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        var savingsAmount = {{ monthly_income }};
+        var savingsGoal = {{ savings_percentage }};
+        var months = [1, 2, 3, 4, 5, 6];
+        var savingsData = months.map(month => (savingsAmount * (savingsGoal / 100)) * month);
+    
+        var ctxSavings = document.getElementById('savingsChart').getContext('2d');
+        var savingsChart = new Chart(ctxSavings, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Savings over Time',
+                    data: savingsData,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    
+        var recordsSpent = {{ total_spent }};
+        var projectedSpending = {{ projected_savings }};
+        var spendingData = [recordsSpent, projectedSpending];
+    
+        var ctxSpending = document.getElementById('spendingChart').getContext('2d');
+        var spendingChart = new Chart(ctxSpending, {
+            type: 'bar',
+            data: {
+                labels: ['Spent', 'Projected'],
+                datasets: [{
+                    label: 'Spending Overview',
+                    data: spendingData,
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+    
+        var goalProgress = {{ goal_progress }};
+        var targetAmount = {{ target_amount }};
+        var goalData = [goalProgress, targetAmount - goalProgress];
+    
+        var ctxGoalProgress = document.getElementById('goalProgressChart').getContext('2d');
+        var goalProgressChart = new Chart(ctxGoalProgress, {
+            type: 'pie',
+            data: {
+                labels: ['Saved', 'Remaining'],
+                datasets: [{
+                    label: 'Goal Progress',
+                    data: goalData,
+                    backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+                    borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
+    
+
+</body>
+</html>

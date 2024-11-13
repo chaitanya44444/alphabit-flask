@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Finance - Add Record</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+        }
+        .gradient-text { background: conic-gradient(from 180deg, #e85907, #f83fa4, #00c477, #daac00); -webkit-background-clip: text; color: transparent; }
+        .button-gradient { background: linear-gradient(195deg, #ff00c3, #400986, #0a0749); color: white; }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+    <h1 class="gradient-text" style="margin:auto;">Here to help you add records! 😊😊</h1></div> 
+    <form action="/add_record" method="POST" style="max-width: 400px; margin: auto;">
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" id="amount" name="amount" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" class="form-control" id="category" name="category" required>
+        </div>
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+        <button type="submit" class="btn button-gradient btn-block">Add Record</button>
+    </form>
+</body>
+</html>
