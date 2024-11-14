@@ -2,22 +2,15 @@
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    box-sizing: border-box;
-}
-
-body, html {
-    height: 100%;
-    overflow: hidden;
 }
 
 .hero {
     width: 100%;
     height: 100vh;
     background-image: url(images/pexels-manfredi-taglialavoro-2102260632-29346320.jpg);
-    background: linear-gradient(135deg, #240b36, #c31432);
+    background: linear-gradient(135deg, #240b36, #c31432); 
     background-size: 400% 400%;
     animation: gradient 5s ease infinite;
-    position: relative;
 }
 
 @keyframes gradient {
@@ -38,17 +31,17 @@ body, html {
     padding: 35px 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding-left: 50%;
-    position: absolute;
+    padding-left: 30%;
+    position: relative;
     top: 50px;
     font-size: medium;
+    justify-content: space-between;
 }
 
 .navbar ul li {
-    list-style: none;
+    list-style: none; 
     display: inline-block;
-    margin: 0 20px;
+    margin: 0 20px; 
 }
 
 .navbar ul li a {
@@ -194,26 +187,6 @@ button:hover {
 }
 
 #he2 {
-    font-size: 20px;
-    padding: 10%;
-}
-
-#featurebox3 {
-    height: 300px;
-    width: 300px;
-    background: linear-gradient(135deg, #240b36, #2b14c3);
-    font-size: 30px;
-    border-radius: 15px;
-    position: relative;
-    top: -1000;
-    left: 1000;
-    text-align: center;
-    padding: 1%;
-    color: wheat;
-    opacity: 80%;
-}
-
-#he3 {
     font-size: 20px;
     padding: 10%;
 }
