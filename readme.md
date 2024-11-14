@@ -34,5 +34,22 @@ Alphabit is a Flask-based web application designed to provide financial insights
 2.Download required stuff
 ``` pip install -r requirments.txt```
 3.open server
-in project root go to terminal and run
+in project root go to terminal and  run
 ```python app.py runserver```
+4.Open your browser and go to http://localhost:5000 to access the app.
+
+Usage
+Dashboard: View all financial insights, including monthly income, savings goals, projected costs, stock prices, and budget graphs.
+Add/Remove Goals and Records: Update your financial data directly from the dashboard.
+Graphs and Analytics: Visualize data with interactive graphs generated using Finance.js.
+Contributing
+Fork the repository.
+Create a new branch (git checkout -b feature-branch).
+Make your changes and commit them (git commit -m 'Add new feature').
+Push to the branch (git push origin feature-branch).
+Open a pull request.
+License
+This project is licensed under the MIT License.
+
+Acknowledgments
+Devansh for front end of /
