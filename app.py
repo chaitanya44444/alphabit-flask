@@ -184,6 +184,8 @@ def set_goal():
 
     return render_template('set_goals.html')
 
-if __name__ == '__main__':
-    os.makedirs('data', exist_ok=True)
-    app.run(debug=True)
+
+if __name__ == "__main__":
+    host = "0.0.0.0"
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host=host, port=port, debug=True)

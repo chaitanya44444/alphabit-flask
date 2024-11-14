@@ -14,6 +14,9 @@ def install_packages():
 if __name__ == "__main__":
     install_packages()
     
+    # Set the PORT environment variable if required by your platform (e.g., Render, Heroku)
+    os.environ["PORT"] = os.environ.get("PORT", "5000")
+    
     # Run app.py with Flask's development server
     try:
         subprocess.check_call([sys.executable, "app.py"])
