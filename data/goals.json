@@ -5,5 +5,12 @@
             "target_amount": 10000.0,
             "saved_amount": 0
         }
+    ],
+    "12345": [
+        {
+            "goal_name": "iphone",
+            "target_amount": 1000.0,
+            "saved_amount": 0
+        }
     ]
 }
